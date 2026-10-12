@@ -30,40 +30,50 @@ Active scanning was restricted to `scanme.nmap.org`, a host provided by the Nmap
 
 ## Work Performed
 
-- Collected domain registration information.
-- Queried DNS records and checked common subdomains.
-- Investigated publicly indexed pages using search operators.
-- Tested host reachability and examined the network path.
-- Identified exposed services and service versions with Nmap.
-- Inspected HTTP response headers and web technologies.
-- Documented findings, limitations, and potential follow-up checks.
+- Collected domain registration information using WHOIS.
+- Queried DNS records, including address and mail-exchange records.
+- Performed preliminary checks for common subdomains; results were not independently verified as valid subdomains.
+- Investigated publicly indexed pages using Google Search operators.
+- Tested host reachability and examined the network path using `ping` and `traceroute`.
+- Performed Nmap service/version detection against the target.
+- Inspected HTTP response headers using `curl` and identified web technologies using WhatWeb.
+- Documented findings, limitations, and areas requiring further verification.
 
 ## Key Findings
 
-- Identified SSH and HTTP services during service/version detection.
-- Observed Apache and OpenSSH version information indicating an Ubuntu-based environment.
-- Collected DNS and mail-server information for the domain.
-- Recorded limitations and inconsistencies that required further verification.
+- Nmap service/version detection identified SSH (port `22/tcp`) and HTTP (port `80/tcp`) as open among the 100 most common TCP ports scanned.
+- The remaining 98 scanned TCP ports were reported as filtered. This result applies only to the scanned ports and does not establish the state of every port on the host.
+- Service banners identified OpenSSH `6.6.1p1` and Apache HTTP Server `2.4.7` on Ubuntu.
+- DNS queries returned address records for `scanme.nmap.org` and mail-exchange records for `nmap.org`.
+- WHOIS queries provided domain registration and nameserver information.
+- HTTP response headers provided additional information about the web server.
+- WhatWeb identified web technologies over HTTP. The HTTPS connection attempt was refused, so HTTPS availability was not confirmed.
+- The preliminary subdomain checks returned matching IP addresses, but these results alone did not establish that the tested names were valid subdomains.
 
-Version banners alone do not confirm that a service is vulnerable or unpatched.
+Version banners and service identification alone do not confirm that a service is vulnerable or unpatched. Further verification would be required before drawing security conclusions.
 
 ## Deliverables
 
-- Detailed project report with terminal screenshots, methodology, results, and conclusions.
-- Documentation of tools used and limitations encountered.
+- Detailed project report containing the methodology, terminal screenshots, results, and conclusions.
+- Documentation of the tools used, observations, and limitations.
+- Selected screenshots demonstrating the reconnaissance workflow.
 
 ## Scope & Ethics
 
-Testing was limited to the authorized target and non-destructive reconnaissance. No exploitation or denial-of-service testing was performed.
+Testing was limited to the designated Nmap scan-testing target and non-destructive reconnaissance activities. No exploitation or denial-of-service testing was performed.
+
+The results represent observations from the testing date and may change as the target's configuration or services change.
 
 ## What I Learned
 
-- Fundamental network reconnaissance and footprinting.
+- Fundamental network reconnaissance and footprinting techniques.
 - DNS enumeration and service fingerprinting.
 - Using command-line security tools in Kali Linux.
-- Interpreting scan results cautiously and documenting technical findings.
+- Interpreting Nmap results and HTTP responses.
+- Recognizing the limitations of preliminary subdomain checks and service banners.
+- Documenting technical findings clearly and responsibly.
 
 ---
 
-**Author:** Alen Shibu  
-**Project:** InternVision Cyber Security Internship
+Author: Alen Shibu  
+Project: InternVision Cyber Security Internship
